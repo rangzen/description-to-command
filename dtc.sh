@@ -40,5 +40,11 @@ RESULT=$(curl https://api.openai.com/v1/completions \
 # Print the result if you need to debug.
 #echo "$RESULT"
 
-# Extract the command.
-echo "$RESULT" | jq -r '.choices[0].text' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' -e 's/^<code>//' -e 's/<\/code>$//' | grep -v '^$'
+# Extract the command and clean the result.
+COMMAND=$(echo "$RESULT" | jq -r '.choices[0].text' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' -e 's/^<code>//' -e 's/<\/code>$//' | grep -v '^$')
+
+# Keep date, description, and command in a ~/.dtc_history.md file with Markdown structure.
+printf "## %s\n### Description\n%s\n### Command\n%s\n" "$(date)" "${DESCRIPTION}" "${COMMAND}" >> ~/.dtc_history.md
+
+# Print the command.
+echo "$COMMAND"

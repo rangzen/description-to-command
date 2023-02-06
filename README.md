@@ -45,3 +45,31 @@ chmod +x dtc.sh
 * create the directory tree test/truc/bidule and change the directory to the last one  
   Should be something like `mkdir -p test/truc/bidule && cd test/truc/bidule`.
 
+## History
+
+All descriptions and commands are saved in a file named `dtc_history.md` in the home directory.
+
+### Example
+
+```markdown
+## Sun 01 Jan 1970 08:13:03 PM EST
+### Description
+'display non-running containers in Docker'
+### Result
+docker ps -a --filter "status=exited"
+## Sun 01 Jan 1970 08:13:28 PM EST
+### Description
+'docker compose command to remove volumes'
+### Result
+docker-compose down -v
+```
+
+## Versions
+
+### 0.2
+
+* Add Markdown history file at `~/.dtc_history.md`.
+
+### 0.0.1
+
+* Initial version
